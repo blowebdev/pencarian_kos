@@ -27,7 +27,7 @@
                          <tr>
                              <td width="1%"><?php echo $no++; ?></td>
                              <td>
-                             	<img src="<?php echo $base_url; ?>upload/<?php echo $d['gambar']; ?>">
+                             	<img src="<?php echo $base_url; ?>upload/<?php echo $d['gambar']; ?>" style="width:200px; height: 100px">
                              </td>
                              <td><?php echo $d['mitra']; ?></td>
                              <td><?php echo $d['nama']; ?></td>
