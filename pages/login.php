@@ -6,7 +6,7 @@ if (isset($_POST['login'])) {
     $cek = mysqli_num_rows($query);
     $data = mysqli_fetch_array($query);
     if ($cek > 0) {
-        $_SESSION['level'] = $data['level'];
+        $_SESSION['level'] = 1;
         $_SESSION['username'] = $data['username'];
         $_SESSION['nama']   = $data['nama'];
         $_SESSION['id']= $data['user_id'];?>
@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
     <?php }else{
         $username  = $_POST['username'];
         $password  = md5($_POST['password']);
-        $query = mysqli_query($conn,"SELECT * FROM `m_mitra` WHERE username = '$username' AND password = '$password'");
+        $query = mysqli_query($conn,"SELECT * FROM `m_pelanggan` WHERE username = '$username' AND password = '$password'");
         $cek = mysqli_num_rows($query);
         $data = mysqli_fetch_array($query);
         if ($cek > 0) {
@@ -36,16 +36,39 @@ if (isset($_POST['login'])) {
                     </script>
                 <?php endif; 
             }else{
-                echo '
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                <div class="alert-message">
-                <strong>Perhatian !! username Atau password Salah, Silahkan cek kembali</strong>
-                </div>
-                </div>
+               $username  = $_POST['username'];
+               $password  = md5($_POST['password']);
+               $query = mysqli_query($conn,"SELECT * FROM `m_mitra` WHERE username = '$username' AND password = '$password'");
+               $cek = mysqli_num_rows($query);
+               $data = mysqli_fetch_array($query);
+               if ($cek > 0) {
+                $_SESSION['level'] = 3;
+                $_SESSION['username'] = $username;
+                $_SESSION['id_mitra'] = $data['id'];
+                $_SESSION['nama']   = $data['nama'];
+                $_SESSION['user_detail']   = $data;
+                ?>
+                <?php if($_SESSION['level']=='admin') : ?>
+                    <script>
+                        window.location = "./"
+                    </script>
+                    <?php else: ?>
+                        <script>
+                            window.location = "./"
+                        </script>
+                    <?php endif; 
+                }else{
+                    echo '
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                    <div class="alert-message">
+                    <strong>Perhatian !! username Atau password Salah, Silahkan cek kembali</strong>
+                    </div>
+                    </div>
 
-                <meta http-equiv="refresh" content="1">
+                    <meta http-equiv="refresh" content="1">
 
-                ';
+                    ';
+                }
             }
         }
     }
@@ -53,7 +76,7 @@ if (isset($_POST['login'])) {
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                <div class="misc-header text-center">
+                <div class="misc-header text-center bg-primary">
                     <label style="color: white; font-weight: bold; font-size: 30px">Djikstra</label>
                 </div>
                 <div class="misc-box">   

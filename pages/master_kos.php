@@ -43,6 +43,7 @@
                             <th>Kode Vertex</th>
                             <th>Mitra</th>
                             <th>Nama</th>
+                            <th>Harga</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
                             <th>Alamat</th>
@@ -53,8 +54,15 @@
                     <tbody>
                      <?php 
                      $no=1;
+                     if ($_SESSION['level']==1) {
+                        $filter = "";
+                     }elseif ($_SESSION['level']==3) {
+                        $filter = "WHERE a.id_mitra='".$_SESSION['id_mitra']."'";
+                     }
                      $q = mysqli_query($conn,"SELECT a.*, b.nama as mitra FROM m_kos as a 
-                        LEFT JOIN m_mitra as b ON a.id_mitra = b.id");
+                        LEFT JOIN m_mitra as b ON a.id_mitra = b.id
+                        ".$filter."
+                        ");
                      while ($d = mysqli_fetch_array($q)) :
                          ?>
 
@@ -63,6 +71,7 @@
                              <td><?php echo $d['kode']; ?></td>
                              <td><?php echo $d['mitra']; ?></td>
                              <td><?php echo $d['nama']; ?></td>
+                             <td><?php echo $d['harga']; ?></td>
                              <td><?php echo $d['lat']; ?></td>
                              <td><?php echo $d['lng']; ?></td>
                              <td><?php echo $d['alamat']; ?></td>

@@ -61,26 +61,51 @@ include "config/koneksi.php";
         </div>
         <div class="col-xs-6">
          <ul class="list-inline top-right-nav">
-           <?php if(!empty($_SESSION['username'])) : ?>
-            <li class="dropdown avtar-dropdown">
-             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $base_url; ?>images/avtar-1.jpg" class="img-circle" width="30" alt="">
-
-            </a>
-            <ul class="dropdown-menu top-dropdown">
-              <li class="divider"></li>
-              <li><a href="<?php echo $base_url; ?>logout"><i class="icon-logout"></i> Logout</a></li>
+          <?php if(in_array($_SESSION['level'],array('x'))):  ?>
+            <li class="dropdown hidden-xs icon-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <i class="glyphicon glyphicon-bell"></i>
+                <span class="badge badge-danger">6</span>
+              </a>
+              <ul class="dropdown-menu top-dropdown lg-dropdown notification-dropdown">
+                <li>
+                  <div class="dropdown-header"><a href="<?php echo $base_url; ?>histori_pemesanan" class="pull-right text-muted"><small>View All</small></a> Notifications </div>
+                  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="scrollDiv" style="overflow: hidden; width: auto; height: 250px;">
+                    <div class="notification-list">
+                      <a href="javascript: void(0);" class="clearfix">
+                        <span class="notification-icon"><i class="icon-cloud-upload text-primary"></i></span> 
+                        <span class="notification-title">Upload Complete</span>
+                        <span class="notification-description">Praesent dictum nisl non est sagittis luctus.</span>
+                        <span class="notification-time">40 minutes ago</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
             </ul>
-          </li>
-          <?php else : ?>
-           <ul class="list-inline top-right-nav">
-            <li class="dropdown avtar-dropdown"><a href="<?php echo $base_url; ?>login">Login</a></li>
-          </ul>
-        <?php endif; ?>
+          <?php endif; ?>
+        </li>
+        <?php if(!empty($_SESSION['username'])) : ?>
+          <li class="dropdown avtar-dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="<?php echo $base_url; ?>images/avtar-1.jpg" class="img-circle" width="30" alt="">
 
-      </ul> 
-    </div>
+          </a>
+          <ul class="dropdown-menu top-dropdown">
+            <li><a href="#"><?php echo $_SESSION['nama']; ?></a></li>
+            <li class="divider"></li>
+            <li><a href="<?php echo $base_url; ?>logout"><i class="icon-logout"></i> Logout</a></li>
+          </ul>
+        </li>
+        <?php else : ?>
+         <ul class="list-inline top-right-nav">
+          <li class="dropdown avtar-dropdown"><a href="<?php echo $base_url; ?>login">Login</a></li>
+        </ul>
+      <?php endif; ?>
+
+    </ul> 
   </div>
+</div>
 </div>
 </div>
 <!-- top bar end-->
@@ -106,36 +131,57 @@ include "config/koneksi.php";
    <li class="dropdown active">
     <a href="<?php echo $base_url; ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-home"></i> Dashboard</a>
   </li>
+  <li class="dropdown">
+    <a href="<?php echo $base_url; ?>djikstra" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i>Djikstra</a>
+  </li>
   <?php if(!empty($_SESSION['username'])) : ?>
+    <?php if(in_array($_SESSION['level'], array('1'))) : ?>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i> Djikstra</a>
+        <ul class="dropdown-menu dropdown-main">
+          <li><a href="<?php echo $base_url; ?>master_kos">Vertex / Master Kos</a></li>
+          <li><a href="<?php echo $base_url; ?>graph">Graph</a></li>
+          <li><a href="<?php echo $base_url; ?>djikstra">Djikstra</a></li>
+        </ul>
+      </li>
+    <?php endif; ?>
+    <?php if(in_array($_SESSION['level'], array('3'))) : ?>
+      <li class="dropdown">
+        <a href="<?php echo $base_url; ?>master_kos" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i> Kos</a>
+      </li>
+      <li class="dropdown">
+        <a href="<?php echo $base_url; ?>histori_pemesanan" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan</a>
+      </li>
+      <li class="dropdown">
+        <a href="<?php echo $base_url; ?>statistik" onclick="alert('Proses pengembangan')" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bar-chart"></i> Laporan</a>
+      </li>
+    <?php endif; ?>
+
+    <?php if(in_array($_SESSION['level'], array('1','2'))) : ?>
+      <li class="dropdown">
+       <a href="<?php echo $base_url; ?>histori_pemesanan" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan</a>
+     </li>
+   <?php endif; ?>
+   <?php if(in_array($_SESSION['level'], array('1'))) : ?>
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i> Djikstra</a>
-      <ul class="dropdown-menu dropdown-main">
-        <li><a href="<?php echo $base_url; ?>master_kos">Vertex / Master Kos</a></li>
-        <li><a href="<?php echo $base_url; ?>graph">Graph</a></li>
-        <li><a href="<?php echo $base_url; ?>djikstra">Djikstra</a></li>
-      </ul>
-    </li>
-    <li class="dropdown">
-      <a href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan</a>
+      <a href="<?php echo $base_url; ?>statistik" onclick="alert('Proses pengembangan')" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bar-chart"></i> Laporan</a>
     </li>
     <li class="dropdown">
       <a href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-user"></i> Pengguna</a>
     </li>
+  <?php endif; ?>
+  <li class="dropdown">
+    <a href="<?php echo $base_url; ?>logout" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-login"></i> Logout</a>
+  </li>
+  <?php else : ?>
     <li class="dropdown">
-      <a href="<?php echo $base_url; ?>logout" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-logout"></i> Logout</a>
+      <a href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-question"></i>Faq</a>
     </li>
-    <?php else : ?>
-      <li class="dropdown">
-        <a href="<?php echo $base_url; ?>djikstra" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i>Djikstra</a>
-      </li>
-      <li class="dropdown">
-        <a href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-question"></i>Faq</a>
-      </li>
-      <li class="dropdown">
-        <a href="<?php echo $base_url; ?>login" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-login"></i> Login</a>
-      </li>
-    <?php endif;  ?>
-  </ul>
+    <li class="dropdown">
+      <a href="<?php echo $base_url; ?>login" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-login"></i> Login</a>
+    </li>
+  <?php endif;  ?>
+</ul>
 
 </div><!--/.nav-collapse -->
 </div><!--/.container-fluid -->
@@ -187,6 +233,7 @@ include "config/koneksi.php";
 <script>
   $(document).ready(function () {
    $('#datatable').dataTable();
+
  });
 </script>
 

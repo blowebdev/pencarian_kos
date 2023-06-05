@@ -9,6 +9,7 @@
                             <th>Foto</th>
                             <th>Mitra</th>
                             <th>Nama</th>
+                            <th>Harga / Bulan</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
                             <th>Alamat</th>
@@ -23,7 +24,6 @@
                         LEFT JOIN m_mitra as b ON a.id_mitra = b.id");
                      while ($d = mysqli_fetch_array($q)) :
                          ?>
-
                          <tr>
                              <td width="1%"><?php echo $no++; ?></td>
                              <td>
@@ -31,11 +31,12 @@
                              </td>
                              <td><?php echo $d['mitra']; ?></td>
                              <td><?php echo $d['nama']; ?></td>
+                             <td><?php echo $d['harga']; ?></td>
                              <td><?php echo $d['lat']; ?></td>
                              <td><?php echo $d['lng']; ?></td>
                              <td><?php echo $d['alamat']; ?></td>
                              <td nowrap="">
-                                 <form action="" method="POST">
+                                 <form action="<?php echo $base_url; ?>pemesanan/<?php echo $d['id']; ?>" method="POST">
                                      <button type="submit" name="pesan" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart "></i> Pesan</button>
                                  </form>
                              </td>

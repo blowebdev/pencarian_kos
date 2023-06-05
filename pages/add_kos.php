@@ -22,6 +22,7 @@
         $lng = $_POST['lng'];
         $id_mitra = $_POST['id_mitra'];
         $alamat = $_POST['alamat'];
+        $harga = $_POST['harga'];
         $deskripsi = $_POST['deskripsi'];
         $date            = date("Y-m-d");
 
@@ -54,9 +55,9 @@
         }
 
         if(!empty($_REQUEST['id'])){
-            $sql = "UPDATE m_kos SET  kode='".$kode."', nama='".$nama."', id_mitra='".$id_mitra."', deskripsi='".$deskripsi."', alamat='".$alamat."', lat='".$lat."', lng='".$lng."', deskripsi='".$deskripsi."' ".$set_gambar." WHERE id='".$_REQUEST['id']."'";
+            $sql = "UPDATE m_kos SET  kode='".$kode."', nama='".$nama."', id_mitra='".$id_mitra."', harga='".$harga."', deskripsi='".$deskripsi."', alamat='".$alamat."', lat='".$lat."', lng='".$lng."', deskripsi='".$deskripsi."' ".$set_gambar." WHERE id='".$_REQUEST['id']."'";
         }else{
-            $sql = "INSERT INTO `m_kos`(`kode`,`nama`, `id_mitra`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`) VALUES ('".$kode."','".$nama."','".$id_mitra."','".$deskripsi."','".$alamat."','".$lat."','".$lng."','".$nm_foto."')";
+            $sql = "INSERT INTO `m_kos`(`kode`,`nama`, `id_mitra`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`, `harga`) VALUES ('".$kode."','".$nama."','".$id_mitra."','".$deskripsi."','".$alamat."','".$lat."','".$lng."','".$nm_foto."', '".$harga."')";
         }
 
 // echo  $sql;
@@ -110,7 +111,12 @@
                                 <select class="form-control" name="id_mitra"  required="">
                                     <option value="">Pilih Pengguna</option>
                                     <?php 
-                                    $pengguna = mysqli_query($conn,"SELECT * FROM m_mitra");
+                                    if ($_SESSION['level']==1) {
+                                        $filter = "";
+                                    }elseif ($_SESSION['level']==3) {
+                                        $filter = "WHERE id='".$_SESSION['id_mitra']."'";
+                                    }
+                                    $pengguna = mysqli_query($conn,"SELECT * FROM m_mitra $filter");
                                     foreach ($pengguna as $key => $damit):
                                         ?>
 
@@ -125,6 +131,12 @@
                                     <label class="col-sm-2 control-label">Nama Kos</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="nama" value="<?php echo $datane['nama']; ?>" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Harga</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="harga" value="<?php echo $datane['harga']; ?>" required="">
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -5,13 +5,13 @@
  	}
  </style>
  <div class="row">
- 	<div class="col-sm-12">
+ 	<div class="col-sm-12" >
  		<div class="panel panel-teal">
  			<div class="panel-heading">
  				Maps Djikstra
  			</div>
  			<div class="panel-body" id="maps">
- 				<div id="map" style="font-weight: bold"><center>Loading...</center></div>
+ 				<div id="map"  style="font-weight: bold"><center>Loading...</center></div>
  			</div>
  		</div>
  	</div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2023 pada 10.43
+-- Waktu pembuatan: 05 Jun 2023 pada 16.08
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -58,6 +58,7 @@ CREATE TABLE `m_kos` (
   `kode` varchar(24) NOT NULL,
   `nama` text NOT NULL,
   `id_mitra` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
   `deskripsi` text NOT NULL,
   `alamat` text NOT NULL,
   `lat` text NOT NULL,
@@ -69,15 +70,15 @@ CREATE TABLE `m_kos` (
 -- Dumping data untuk tabel `m_kos`
 --
 
-INSERT INTO `m_kos` (`id`, `kode`, `nama`, `id_mitra`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`) VALUES
-(1, 'A', 'Hotel Dewi', 5, 'Kos enak dan nyaman', 'Hotel Dewi, Jalan Cempaka, Babatan, Kepuhkembeng, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5342103', '112.2508957', '2023-05-29-banner_depan3.png'),
-(2, 'B', 'Mbok Semah', 4, 'Warung makan mbok semah', 'Nasi Lodeh Mbok Semah, RT.05/RW.02, Desa Dukuhklopo, Dukuh Klopo, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5108226', '112.2546161', '2023-05-29-banner_depan2.png'),
-(3, 'C', 'Pasar Peterongan', 3, 'Kos enak dan murah', 'Pasar Peterongan Jombang, Mancar Timur, Mancar, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5384113', '112.2768476', '2023-05-29-banner_depan2.png'),
-(4, 'D', 'Ponpes DU', 4, 'Kos enak dan murah', 'Pondok Pesantren Darul Ulum Jombang, Wonokerto Selatan, Peterongan, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.544236799999999', '112.2758029', '2023-05-29-banner_depan2.png'),
-(5, 'E', 'Stasiun Kereta api jombang', 4, 'Dekripsi', 'Stasiun Jombang, Jalan Basuki Rahmad, Kaliwungu, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.557961799999999', '112.2334793', '2023-05-29-banner_depan2.png'),
-(7, 'F', 'Kos murah rejoso', 3, 'Deskripsi kos', 'RUN FUTSAL, Jalan Kemuning, Sambong Dukuh, Candi Mulyo, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5312384', '112.2398082', '2023-05-29-banner_depan.png'),
-(8, 'G', 'Kos min 1 jombang', 3, 'sa', 'Bareng, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.666667', '112.3', '2023-05-29-banner_depan2.png'),
-(9, 'J', 'KOS MURAH DEKAT KAMPUS', 5, 'Deskirpsi\r\nkamar mandi \r\nfree wifi', 'Dekat bravo', '-7.543100394857285', '112.21562951025389', '2023-06-03-tenda.jpg');
+INSERT INTO `m_kos` (`id`, `kode`, `nama`, `id_mitra`, `harga`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`) VALUES
+(1, 'A', 'Kos murah menyakinkan', 6, 10000, 'Kos enak dan nyaman', 'Hotel Dewi, Jalan Cempaka, Babatan, Kepuhkembeng, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5342103', '112.2508957', '2023-05-29-banner_depan3.png'),
+(2, 'B', 'Mbok Semah', 6, 40000, 'Warung makan mbok semah', 'Nasi Lodeh Mbok Semah, RT.05/RW.02, Desa Dukuhklopo, Dukuh Klopo, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5108226', '112.2546161', '2023-05-29-banner_depan2.png'),
+(3, 'C', 'Pasar Peterongan', 6, 600000, 'Kos enak dan murah', 'Pasar Peterongan Jombang, Mancar Timur, Mancar, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5384113', '112.2768476', '2023-05-29-banner_depan2.png'),
+(4, 'D', 'Ponpes DU', 6, 0, 'Kos enak dan murah', 'Pondok Pesantren Darul Ulum Jombang, Wonokerto Selatan, Peterongan, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.544236799999999', '112.2758029', '2023-05-29-banner_depan2.png'),
+(5, 'E', 'Stasiun Kereta api jombang', 6, 0, 'Dekripsi', 'Stasiun Jombang, Jalan Basuki Rahmad, Kaliwungu, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.557961799999999', '112.2334793', '2023-05-29-banner_depan2.png'),
+(7, 'F', 'Kos murah rejoso', 6, 0, 'Deskripsi kos', 'RUN FUTSAL, Jalan Kemuning, Sambong Dukuh, Candi Mulyo, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.5312384', '112.2398082', '2023-05-29-banner_depan.png'),
+(8, 'G', 'Kos min 1 jombang', 3, 0, 'sa', 'Bareng, Kabupaten Jombang, Jawa Timur, Indonesia', '-7.666667', '112.3', '2023-05-29-banner_depan2.png'),
+(9, 'J', 'KOS MURAH DEKAT KAMPUS', 5, 0, 'Deskirpsi\r\nkamar mandi \r\nfree wifi', 'Dekat bravo', '-7.543100394857285', '112.21562951025389', '2023-06-03-tenda.jpg');
 
 -- --------------------------------------------------------
 
@@ -101,10 +102,7 @@ CREATE TABLE `m_mitra` (
 --
 
 INSERT INTO `m_mitra` (`id`, `nama`, `hp`, `email`, `alamat`, `username`, `password`, `status`) VALUES
-(2, 'Ahmad', '6285748496135', 'hudamiftakh8@gmail.com', 'Jombang jawa timur', 'huda', '202cb962ac59075b964b07152d234b70', ''),
-(3, 'Umam', '6285712551156', 'ulin@gmail.com', 'Alamat 2', 'ulin', '81dc9bdb52d04dc20036dbd8313ed055', ''),
-(4, 'Zeaid', '62847758857676', 'email1@gmail.com', 'Alamat Jombang', 'user1', '202cb962ac59075b964b07152d234b70', ''),
-(5, 'Yaqin', '6287866163545', 'email@gmail.com', 'Jombang', 'user2', '202cb962ac59075b964b07152d234b70', '');
+(6, 'Nama Mitra', '62859950069', 'email@gmail.com', 'Alamat', 'mitra', '202cb962ac59075b964b07152d234b70', '');
 
 -- --------------------------------------------------------
 
@@ -120,18 +118,19 @@ CREATE TABLE `m_pelanggan` (
   `alamat` text NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
-  `status` text NOT NULL
+  `status` text NOT NULL,
+  `level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `m_pelanggan`
 --
 
-INSERT INTO `m_pelanggan` (`id`, `nama`, `hp`, `email`, `alamat`, `username`, `password`, `status`) VALUES
-(2, 'Ahmad', '6285748496135', 'hudamiftakh8@gmail.com', 'Jombang jawa timur', 'huda', '202cb962ac59075b964b07152d234b70', ''),
-(3, 'Umam', '6285712551156', 'ulin@gmail.com', 'Alamat 2', 'ulin', '81dc9bdb52d04dc20036dbd8313ed055', ''),
-(4, 'Zeaid', '62847758857676', 'email1@gmail.com', 'Alamat Jombang', 'user1', '202cb962ac59075b964b07152d234b70', ''),
-(5, 'Yaqin', '6287866163545', 'email@gmail.com', 'Jombang', 'user2', '202cb962ac59075b964b07152d234b70', '');
+INSERT INTO `m_pelanggan` (`id`, `nama`, `hp`, `email`, `alamat`, `username`, `password`, `status`, `level`) VALUES
+(4, 'Zeaid', '62847758857676', 'email1@gmail.com', 'Alamat Jombang', 'user1', '202cb962ac59075b964b07152d234b70', '', 0),
+(5, 'Yaqin', '6287866163545', 'email@gmail.com', 'Jombang', 'user2', '202cb962ac59075b964b07152d234b70', '', 0),
+(6, 'nama', '629885996868', 'email@gmail.com', 'Alamat', 'user3', '202cb962ac59075b964b07152d234b70', '', 0),
+(7, 'pengguna', '6299588696968', 'namaemail@gmail.com', 'Alamat', 'pengguna', '202cb962ac59075b964b07152d234b70', '', 0);
 
 -- --------------------------------------------------------
 
@@ -145,8 +144,21 @@ CREATE TABLE `m_transaksi` (
   `id_kos` int(11) NOT NULL,
   `kode_transaksi` text NOT NULL,
   `tgl_pemesanan` datetime NOT NULL,
-  `keterangan` text NOT NULL
+  `tgl_kunjung` date NOT NULL,
+  `keterangan` text NOT NULL,
+  `harga` int(11) NOT NULL,
+  `total_bulan` int(11) NOT NULL,
+  `nama` text NOT NULL,
+  `hp` int(11) NOT NULL,
+  `grand_total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `m_transaksi`
+--
+
+INSERT INTO `m_transaksi` (`id`, `id_pelanggan`, `id_kos`, `kode_transaksi`, `tgl_pemesanan`, `tgl_kunjung`, `keterangan`, `harga`, `total_bulan`, `nama`, `hp`, `grand_total`) VALUES
+(2, 4, 1, 'TRXED2F1A0C', '2023-06-05 00:00:00', '2023-06-05', '', 10000, 5, 'Zeaid', 2147483647, 50000);
 
 -- --------------------------------------------------------
 
@@ -223,19 +235,19 @@ ALTER TABLE `m_kos`
 -- AUTO_INCREMENT untuk tabel `m_mitra`
 --
 ALTER TABLE `m_mitra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `m_pelanggan`
 --
 ALTER TABLE `m_pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `m_transaksi`
 --
 ALTER TABLE `m_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
