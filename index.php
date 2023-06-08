@@ -131,9 +131,11 @@ include "config/koneksi.php";
    <li class="dropdown active">
     <a href="<?php echo $base_url; ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-home"></i> Dashboard</a>
   </li>
-  <li class="dropdown">
-    <a href="<?php echo $base_url; ?>djikstra" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i>Djikstra</a>
-  </li>
+  <?php if(!in_array($_SESSION['level'], array('1'))) : ?>
+    <li class="dropdown">
+      <a href="<?php echo $base_url; ?>djikstra" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i>Djikstra</a>
+    </li>
+  <?php endif; ?>
   <?php if(!empty($_SESSION['username'])) : ?>
     <?php if(in_array($_SESSION['level'], array('1'))) : ?>
       <li class="dropdown">
