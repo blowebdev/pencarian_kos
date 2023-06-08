@@ -64,7 +64,7 @@ $datane = mysqli_fetch_array(mysqli_query($conn,"SELECT c.*, c.nama as kos, d.na
                             <tbody>
                                 <tr>
                                     <td><strong>Sub Total :</strong></td>
-                                    <td><?php echo number_format($datane['total_bulan']); ?></td>
+                                    <td><?php echo number_format($datane['grand_total']); ?></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Pajak :</strong></td>
@@ -72,7 +72,7 @@ $datane = mysqli_fetch_array(mysqli_query($conn,"SELECT c.*, c.nama as kos, d.na
                                 </tr>
                                 <tr>
                                     <td><strong>TOTAL :</strong></td>
-                                    <td><?php echo number_format($datane['total_bulan']); ?></td>
+                                    <td><?php echo number_format($datane['grand_total']); ?></td>
                                 </tr>
                             </tbody>
                         </table>
