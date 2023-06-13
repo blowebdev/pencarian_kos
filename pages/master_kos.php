@@ -79,7 +79,7 @@
 
                                  <form action="" method="POST">
                                      <a href="<?php echo $base_url; ?>add_kos/<?php echo $d['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                     <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                     <input type="hidden" name="id" value="<?php echo $d['id']; ?>">
                                      <button type="submit" name="hapus" onclick="return confirm('Apakah anda ingin menghapus data ini ?');" class="btn btn-danger btn-sm"><i class="fa fa-trash "></i></button>
                                  </form>
                              </td>

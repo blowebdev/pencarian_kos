@@ -1,106 +1,110 @@
  <div class="container">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-
-        <div class="misc-box">   
-
-            <div class="text-center w-75 m-auto">
-                  <span style="font-weight: bold; font-size: 20px">Daftar pelanggan <br>Pencarian kos</span>
+           <div class="misc-header text-center bg-danger">
+                <label style="color: white; font-weight: bold; font-size: 30px">
+                     <?php if(!empty($_REQUEST['id2'])) : ?>
+                        <span style="font-weight: bold; font-size: 20px">Tambah Edit Master User</span>
+                        <?php else : ?>
+                              <span style="font-weight: bold; font-size: 20px">Daftar pelanggan <br>Pencarian kos</span>
+                        <?php endif; ?>
+                  </label>
             </div>
-            <?php 
-            if (isset($_POST['login'])) {
-                  $nama = $_POST['nama'];
-                  $alamat = $_POST['alamat'];
-                  $hp =  str_replace('+', '', hp($_POST['hp']));
-                  $email = $_POST['email'];
-                  $username = $_POST['username'];
-                  $password = md5($_POST['password']);
-                  $level = ($_REQUEST['level']=='3') ? "m_mitra": "m_pelanggan";
-
-                  $url_confirm = "Terimakasih anda sudah daftar di aplikasi DJIKSTRA";
-
-                  if (!empty($_REQUEST['id'])) {
+            <div class="misc-box">   
+                  <?php 
+                  if (isset($_POST['login'])) {
+                        $nama = $_POST['nama'];
+                        $alamat = $_POST['alamat'];
                         $hp =  str_replace('+', '', hp($_POST['hp']));
-                        $sql = "UPDATE ".$level." SET 
-                        nama ='".$nama."',
-                        hp='".$hp."',
-                        email='".$email."',
-                        alamat='".$alamat."',
-                        username='".$username."',
-                        password='".$password."'
-                        WHERE id='".$_REQUEST['id']."'
-                        ";
-                  }else{
-                        $sql = "
-                        INSERT INTO `".$level."`(
-                        `nama`, 
-                        `hp`, 
-                        `email`, 
-                        `alamat`, 
-                        `username`, 
-                        `password`) 
-                        VALUES (
-                        '".$nama."',
-                        '".$hp."',
-                        '".$email."',
-                        '".$alamat."',
-                        '".$username."',
-                        '".$password."')
-                        ";
-                  }
-                  // echo $sql;
-                  $exc = mysqli_query($conn,$sql);
-                  if ($exc) {
+                        $email = $_POST['email'];
+                        $username = $_POST['username'];
+                        $password = md5($_POST['password']);
+                        $level = ($_REQUEST['level']=='3') ? "m_mitra": "m_pelanggan";
 
-                        if(!empty($_REQUEST['id'])){
-                              echo '
-                              <div class="alert alert-success alert-dismissible" role="alert">
-                              <div class="alert-message">
-                              <strong>Perhatian !! Data berhasil disimpan</strong>
-                              </div>
-                              </div>
-                              <meta http-equiv="refresh" content="1;">
-                              ';
+                        $url_confirm = "Terimakasih anda sudah daftar di aplikasi DJIKSTRA";
+
+                        if (!empty($_REQUEST['id'])) {
+                              $hp =  str_replace('+', '', hp($_POST['hp']));
+                              $sql = "UPDATE ".$level." SET 
+                              nama ='".$nama."',
+                              hp='".$hp."',
+                              email='".$email."',
+                              alamat='".$alamat."',
+                              username='".$username."',
+                              password='".$password."'
+                              WHERE id='".$_REQUEST['id']."'
+                              ";
                         }else{
-                              $data = array(
-                                    'chatId'      => $hp.'@c.us',
-                                    'message'    => $url_confirm,
-                              );
-                              $options = array(
-                                    'http' => array(
-                                          'method'  => 'POST',
-                                          'content' => json_encode( $data ),
-                                          'header'=>  "Content-Type: application/json\r\n" .
-                                          "Accept: application/json\r\n"
-                                    )
-                              );
-                              $url = "https://ru-api.basis-api.com/waInstance1101000819/sendMessage/8c7b8d6b26d891250cb882937249d2aa5cb3c5c15da36079";
-                              $context  = stream_context_create( $options );
-                              $result = file_get_contents( $url, false, $context );
-                              $response = json_decode( $result);
+                              $sql = "
+                              INSERT INTO `".$level."`(
+                              `nama`, 
+                              `hp`, 
+                              `email`, 
+                              `alamat`, 
+                              `username`, 
+                              `password`) 
+                              VALUES (
+                              '".$nama."',
+                              '".$hp."',
+                              '".$email."',
+                              '".$alamat."',
+                              '".$username."',
+                              '".$password."')
+                              ";
+                        }
+                  // echo $sql;
+                        $exc = mysqli_query($conn,$sql);
+                        if ($exc) {
 
-                              if($response){
+                              if(!empty($_REQUEST['id'])){
                                     echo '
                                     <div class="alert alert-success alert-dismissible" role="alert">
                                     <div class="alert-message">
                                     <strong>Perhatian !! Data berhasil disimpan</strong>
                                     </div>
                                     </div>
-                                    <meta http-equiv="refresh" content="1; url='.$base_url.'done">
+                                     <meta http-equiv="refresh" content="1; url='.$base_url.'users">
                                     ';
+                              }else{
+                                    $data = array(
+                                          'chatId'      => $hp.'@c.us',
+                                          'message'    => $url_confirm,
+                                    );
+                                    $options = array(
+                                          'http' => array(
+                                                'method'  => 'POST',
+                                                'content' => json_encode( $data ),
+                                                'header'=>  "Content-Type: application/json\r\n" .
+                                                "Accept: application/json\r\n"
+                                          )
+                                    );
+                                    $url = "https://ru-api.basis-api.com/waInstance1101000819/sendMessage/8c7b8d6b26d891250cb882937249d2aa5cb3c5c15da36079";
+                                    $context  = stream_context_create( $options );
+                                    $result = file_get_contents( $url, false, $context );
+                                    $response = json_decode( $result);
+
+                                    if($response){
+                                          echo '
+                                          <div class="alert alert-success alert-dismissible" role="alert">
+                                          <div class="alert-message">
+                                          <strong>Perhatian !! Data berhasil disimpan</strong>
+                                          </div>
+                                          </div>
+                                          <meta http-equiv="refresh" content="1; url='.$base_url.'done">
+                                          ';
+                                    }
                               }
+
+
+                        }else{
+                              echo '
+                              <div class="alert alert-danger alert-dismissible" role="alert">
+                              <div class="alert-message">
+                              <strong>Perhatian !! Data gagal disimpan</strong>
+                              </div>
+                              </div>
+                              ';
                         }
-
-
-                  }else{
-                        echo '
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                        <div class="alert-message">
-                        <strong>Perhatian !! Data gagal disimpan</strong>
-                        </div>
-                        </div>
-                        ';
-                  }
 
 
 // $data = array(
@@ -121,19 +125,29 @@
 // $response = json_decode( $result);
 
 // var_dump($response);
-            }
+                  }
 
-            if (!empty($_REQUEST['id'])) {
-                  $data = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM master_pelanggan WHERE id='".$_REQUEST['id']."'"));
-            }
-            ?>  
-            <form action="" method="POST">
+                  if (!empty($_REQUEST['id'])) {
+                   $level = str_replace('/','',$_REQUEST['id2']);
+                   $data = mysqli_fetch_array(mysqli_query($conn,"
+                        SELECT v.* FROM (
+                        SELECT 'm_mitra' as tb, 'mitra' as level, nama, hp, username, email, id, alamat   FROM `m_mitra` 
+                        UNION 
+                        SELECT 'm_pelanggan' as tb, 'pelanggan' as level, nama, hp, username, email, id , alamat  FROM `m_pelanggan` 
+                        ) AS v
+                        WHERE v.id=".$_REQUEST['id']." AND v.level='".$level."'
+
+                        "));
+
+             }
+             ?>  
+             <form action="" method="POST">
                  <div class="form-group mb-3">
                   <label for="emailaddress">Daftar Sebagai</label>
                   <select class="form-control" name="level" required="">
-                        <option value="">Pilih Level</option>
-                        <option value="3">Mitra</option>
-                        <option value="2">Pengguna</option>
+                        <option value="">Daftar Sebagai</option>
+                        <option value="3" <?php echo ($level=="mitra") ? "selected": ""; ?>>Mitra</option>
+                        <option value="2" <?php echo ($level=="pelanggan") ? "selected": ""; ?>>Pengguna</option>
                   </select>
             </div>
             <div class="form-group mb-3">

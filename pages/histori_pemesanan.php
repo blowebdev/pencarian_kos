@@ -13,7 +13,7 @@
                             <th>Mitra</th>
                             <th>Tanggal Kunjung</th>
                             <th>Harga / Bulan</th>
-                            <th>Total</th>
+                            <th>Total Bulan</th>
                             <th>Grand Total</th>
                             <th>Aksi</th>
                         </tr>
@@ -46,8 +46,8 @@
                               <td><?php echo $d['mitra']; ?></td>
                               <td><?php echo $d['tgl_kunjung']; ?></td>
                               <td><?php echo $d['harga']; ?></td>
-                              <td><?php echo $d['lng']; ?></td>
-                              <td><?php echo $d['alamat']; ?></td>
+                              <td><?php echo $d['total_bulan']; ?></td>
+                              <td><?php echo $d['grand_total']; ?></td>
                               <td nowrap="">
                                <form action="<?php echo $base_url; ?>invoice/<?php echo $d['kode_transaksi']; ?>" method="POST">
                                    <button type="submit" name="pesan" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button>

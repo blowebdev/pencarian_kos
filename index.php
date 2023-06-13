@@ -21,25 +21,25 @@ include "config/koneksi.php";
 	<link href="<?php echo $base_url; ?>plugins/pace/pace.css" rel="stylesheet">
 	<link href="<?php echo $base_url; ?>plugins/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo $base_url; ?>plugins/nano-scroll/nanoscroller.css">
-	<link href="<?php echo $base_url; ?>plugins/chart-c3/c3.min.css" rel="stylesheet">
 	<link href="<?php echo $base_url; ?>plugins/iCheck/blue.css" rel="stylesheet">
 	<!-- dataTables -->
 	<link href="<?php echo $base_url; ?>plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo $base_url; ?>plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo $base_url; ?>plugins/toast/jquery.toast.min.css" rel="stylesheet">
+  <script src="<?php echo $base_url; ?>chart/canvasjs.min.js"></script>
+  
 
-	<script
+  <script
   src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&callback=initMap&libraries=places&v=weekly"
   defer
   ></script>
   <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&callback=initMap">
-</script>
-<!--  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&callback=initMap"></script> -->
-<!--template css-->
-<link href="<?php echo $base_url; ?>css/style.css" rel="stylesheet">
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&callback=initMap"></script>
+  <!--  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQTw1qpUDtY&callback=initMap"></script> -->
+  <!--template css-->
+  <link href="<?php echo $base_url; ?>css/style.css" rel="stylesheet">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -131,6 +131,10 @@ include "config/koneksi.php";
    <li class="dropdown active">
     <a href="<?php echo $base_url; ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-home"></i> Dashboard</a>
   </li>
+  <li class="dropdown">
+    <a href="<?php echo $base_url; ?>maps" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-map"></i> Sebaran</a>
+  </li>
+
   <?php if(!in_array($_SESSION['level'], array('1'))) : ?>
     <li class="dropdown">
       <a href="<?php echo $base_url; ?>djikstra" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i>Djikstra</a>
@@ -166,10 +170,10 @@ include "config/koneksi.php";
    <?php endif; ?>
    <?php if(in_array($_SESSION['level'], array('1'))) : ?>
     <li class="dropdown">
-      <a href="<?php echo $base_url; ?>statistik" onclick="alert('Proses pengembangan')" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bar-chart"></i> Laporan</a>
+      <a href="<?php echo $base_url; ?>statistik" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bar-chart"></i> Laporan</a>
     </li>
     <li class="dropdown">
-      <a href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-user"></i> Pengguna</a>
+      <a href="<?php echo $base_url; ?>users" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-user"></i> Pengguna</a>
     </li>
   <?php endif; ?>
   <li class="dropdown">
@@ -231,11 +235,16 @@ include "config/koneksi.php";
 <script src="<?php echo $base_url; ?>plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo $base_url; ?>plugins/datatables/dataTables.responsive.min.js"></script>
 
+<!--page script-->
+<script src="<?php echo $base_url; ?>js/float-custom.js"></script>
+<script src="<?php echo $base_url; ?>plugins/chartJs/Chart.min.js"></script>
+
+
+<script type="text/javascript"></script>
 
 <script>
   $(document).ready(function () {
    $('#datatable').dataTable();
-
  });
 </script>
 
