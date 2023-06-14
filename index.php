@@ -153,9 +153,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
   </li>
 
   <?php if(!in_array($_SESSION['level'], array('1'))) : ?>
-    <li class="dropdown">
+   <!--  <li class="dropdown">
       <a href="<?php echo $base_url; ?>djikstra" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i>Djikstra</a>
-    </li>
+    </li> -->
   <?php endif; ?>
   <?php if(!empty($_SESSION['username'])) : ?>
     <?php if(in_array($_SESSION['level'], array('1'))) : ?>

@@ -71,13 +71,13 @@ $mark = json_encode($damarker);
             // Add markers to the map
             for (var i = 0; i < markers.length; i++) {
                 var marker = new google.maps.Marker({
-                    position: {lat: markers[i].lat, lng: markers[i].lng},
+                    position: {lat: parseInt(markers[i].lat), lng: parseInt(markers[i].lng)},
                     map: map,
                     icon : markers[i].icon,
                     label: markers[i].label
                 });
 
-
+                console.log(markers[i].icon);
                 var infoWindow = new google.maps.InfoWindow({
                     content: ""+markers[i].description+""
                 });
