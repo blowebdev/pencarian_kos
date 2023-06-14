@@ -85,6 +85,15 @@
                         </div>
                     </div>
                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Pembayaran</label>
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                <option value="">Pilih pembayaran</option>
+                                <option value="cash_mitra">Cash Dilokasi</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
                         <label class="col-sm-2 control-label">Grand Total</label>
                         <div class="col-sm-6">
                             <input type="text" readonly="" class="form-control" name="grand_total" id="grand_total2" required="">
