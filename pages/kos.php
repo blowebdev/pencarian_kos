@@ -46,6 +46,7 @@
                             <form action="maps_direction" method="POST">
                                 <input type="hidden" value="<?php echo $_REQUEST['lat']; ?>" name="lat">
                                 <input type="hidden" value="<?php echo $_REQUEST['lng']; ?>" name="lng">
+                                <input type="hidden" value="<?php echo $_REQUEST['alamat']; ?>" name="alamat">
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-map"></i> Rekomendasi Rute Terdekat</button>
                             </form>
                         </div>
