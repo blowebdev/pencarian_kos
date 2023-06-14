@@ -99,7 +99,7 @@
                 <div class="panel-body">
                     <form method="POST" action="" class="form-horizontal" enctype="multipart/form-data">
                         <fieldset>
-                           <div class="form-group">
+                         <div class="form-group">
                             <label class="col-sm-2 control-label">Kode Huruf</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="kode" placeholder="A, B , C , D , E , F" value="<?php echo $datane['kode']; ?>" required="">
@@ -217,61 +217,55 @@
                 var marker;
 
                 function initMap() {
-var initialLatLng = { lat: -7.561479, lng: 112.2592315 }; // Koordinat Jakarta
+                    var initialLatLng = { lat: -7.561479, lng: 112.2592315 };
 
-map = new google.maps.Map(document.getElementById('map'), {
-    center: initialLatLng,
-    zoom: 12
-});
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: initialLatLng,
+                        zoom: 12
+                    });
+                    marker = new google.maps.Marker({
+                        position: initialLatLng,
+                        map: map,
+                        draggable: true
+                    });
+                    marker.addListener('dragend', function () {
+                        updateMarkerPosition(marker.getPosition());
+                    });
+                    var input = document.getElementById('searchTextField');
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        var place = autocomplete.getPlace();
+                        var lat = place.geometry.location.lat();
+                        var long = place.geometry.location.lng();
+                        var panjang = place.address_components.length;
+                        var index =place.address_components;
+                        geocodeAddress(place);
+                        document.getElementById('city2').value = place.name;
+                        document.getElementById('cityLat').value = place.geometry.location.lat();
+                        document.getElementById('cityLng').value = place.geometry.location.lng();
+                    });
+                }
 
-marker = new google.maps.Marker({
-    position: initialLatLng,
-    map: map,
-    draggable: true
-});
+                function geocodeAddress(place) {
+                    var geocoder = new google.maps.Geocoder();
+                    var address = document.getElementById('searchTextField').value;
+                    geocoder.geocode({ 'address': address }, function (results, status) {
+                        if (status === 'OK') {
+                            var location = results[0].geometry.location;
+                            map.setCenter(location);
+                            marker.setPosition(location);
+                            updateMarkerPosition(location);
+                        } else {
+                            alert('Geocode was not successful for the following reason: ' + status);
+                        }
+                    });
+                }
 
-// Event listener saat marker di-drag
-marker.addListener('dragend', function () {
-    updateMarkerPosition(marker.getPosition());
-});
+                function updateMarkerPosition(latLng) {
+                    document.getElementById('latitudeInput').value = latLng.lat();
+                    document.getElementById('longitudeInput').value = latLng.lng();
+                    document.getElementById('detail_almat').value = document.getElementById('searchTextField').value;
+                }
 
-// Seacrg bar
-
-var input = document.getElementById('searchTextField');
-var autocomplete = new google.maps.places.Autocomplete(input);
-google.maps.event.addListener(autocomplete, 'place_changed', function () {
-    var place = autocomplete.getPlace();
-    var lat = place.geometry.location.lat();
-    var long = place.geometry.location.lng();
-    var panjang = place.address_components.length;
-    var index =place.address_components;
-    geocodeAddress(place);
-    document.getElementById('city2').value = place.name;
-    document.getElementById('cityLat').value = place.geometry.location.lat();
-    document.getElementById('cityLng').value = place.geometry.location.lng();
-});
-}
-
-function geocodeAddress(place) {
-    var geocoder = new google.maps.Geocoder();
-    var address = document.getElementById('searchTextField').value;
-    geocoder.geocode({ 'address': address }, function (results, status) {
-        if (status === 'OK') {
-            var location = results[0].geometry.location;
-            map.setCenter(location);
-            marker.setPosition(location);
-            updateMarkerPosition(location);
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    });
-}
-
-function updateMarkerPosition(latLng) {
-    document.getElementById('latitudeInput').value = latLng.lat();
-    document.getElementById('longitudeInput').value = latLng.lng();
-    document.getElementById('detail_almat').value = document.getElementById('searchTextField').value;
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+                google.maps.event.addDomListener(window, 'load', initialize);
+            </script>
