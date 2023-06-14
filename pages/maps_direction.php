@@ -69,22 +69,11 @@ $mark = json_encode($damarker);
             var markers = <?php echo $mark; ?>; 
 
             // Add markers to the map
-            for (var i = 0; i < markers.length; i++) {
+             for (var i = 0; i < markers.length; i++) {
                 var marker = new google.maps.Marker({
-                    position: {lat: parseInt(markers[i].lat), lng: parseInt(markers[i].lng)},
+                    position: {lat: markers[i].lat, lng: markers[i].lng},
                     map: map,
-                    icon : markers[i].icon,
                     label: markers[i].label
-                });
-
-                console.log(markers[i].icon);
-                var infoWindow = new google.maps.InfoWindow({
-                    content: ""+markers[i].description+""
-                });
-
-                // Show popup when marker is clicked
-                marker.addListener('click', function() {
-                    infoWindow.open(map, marker);
                 });
             }
 
