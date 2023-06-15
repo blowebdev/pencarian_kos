@@ -99,7 +99,7 @@
                           <td style="font-weight: bold;" nowrap=""><?php echo (empty($_REQUEST['lat'])) ? "lokasi saat dahulu": number_format($d['distance'],5)." Km"; ?> </td>
                           <td nowrap="">
                            <form action="<?php echo $base_url; ?>pemesanan/<?php echo $d['id']; ?>" method="POST">
-                               <a href="#" name="pesan" class="btn btn-success btn-sm"><i class="fa fa-exchange"></i> Detail Kos</a>
+                               <a href="<?php echo $base_url; ?>detail_kos/<?php echo $d['id']; ?>" name="pesan" class="btn btn-success btn-sm"><i class="fa fa-home"></i> Detail Kos</a>
                                <button type="submit" name="pesan" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart "></i> Pesan</button>
                                <a href="https://www.google.com/maps/dir/?api=1&origin=<?php echo $_REQUEST['lat']; ?>,<?php echo $_REQUEST['lng']; ?>&destination=<?php echo $d['lat']; ?>,<?php echo $d['lng']; ?>" target="_blank" type="submit" name="pesan" class="btn btn-danger btn-sm"><i class="fa fa-car "></i> Direction</a>
                            </form>

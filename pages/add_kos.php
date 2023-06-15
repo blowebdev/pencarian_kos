@@ -68,7 +68,7 @@
 
 
          if (empty($temp_name2)) {
-            $set_gambar2 = ",gambar2='".$nama_gambar."'";
+            $set_gambar2 = ",gambar2='".$nama_gambar2."'";
         }else{  
             $file_ext=strtolower(end(explode('.',$_FILES['gambar2']['name'])));
             $expensions= array("jpeg","jpg","png");
@@ -78,18 +78,18 @@
             }elseif($size >= 3097152){
                 echo "upload maksimal 3 mb";
             }else{
-                $Move = move_uploaded_file($temp_name2, 'upload/'.$date."-".$name_file.'');
+                $Move = move_uploaded_file($temp_name2, 'upload/'.$date."-".$name_file2.'');
                 if ($Move) {
                     unlink('"upload/'.$file.'"');
-                    $nm_foto  = $date."-".$name_file;
+                    $nm_foto2  = $date."-".$name_file2;
                 }
             }
 
-            $set_gambar2 = ",gambar2='".$nm_foto."'";
+            $set_gambar2 = ",gambar2='".$nm_foto2."'";
         }
 
          if (empty($temp_name3)) {
-            $set_gambar3 = ",gambar3='".$nama_gambar."'";
+            $set_gambar3 = ",gambar3='".$nama_gambar3."'";
         }else{  
             $file_ext=strtolower(end(explode('.',$_FILES['gambar3']['name'])));
             $expensions= array("jpeg","jpg","png");
@@ -99,20 +99,20 @@
             }elseif($size >= 3097152){
                 echo "upload maksimal 3 mb";
             }else{
-                $Move = move_uploaded_file($temp_name3, 'upload/'.$date."-".$name_file.'');
+                $Move = move_uploaded_file($temp_name3, 'upload/'.$date."-".$name_file3.'');
                 if ($Move) {
                     unlink('"upload/'.$file.'"');
-                    $nm_foto2  = $date."-".$name_file;
+                    $nm_foto3  = $date."-".$name_file3;
                 }
             }
 
-            $set_gambar3 = ",gambar3='".$nm_foto2."'";
+            $set_gambar3 = ",gambar3='".$nm_foto3."'";
         }
 
         if(!empty($_REQUEST['id'])){
             $sql = "UPDATE m_kos SET  kode='".$kode."', nama='".$nama."', id_mitra='".$id_mitra."', harga='".$harga."', deskripsi='".$deskripsi."', alamat='".$alamat."', lat='".$lat."', lng='".$lng."', deskripsi='".$deskripsi."' ".$set_gambar.$set_gambar2.$set_gambar3." WHERE id='".$_REQUEST['id']."'";
         }else{
-            $sql = "INSERT INTO `m_kos`(`kode`,`nama`, `id_mitra`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`, `harga`, `gambar2`,`gambar3`) VALUES ('".$kode."','".$nama."','".$id_mitra."','".$deskripsi."','".$alamat."','".$lat."','".$lng."','".$nm_foto."', '".$harga."','".$gambar2."','".$gambar3."')";
+            $sql = "INSERT INTO `m_kos`(`kode`,`nama`, `id_mitra`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`, `harga`, `gambar2`,`gambar3`) VALUES ('".$kode."','".$nama."','".$id_mitra."','".$deskripsi."','".$alamat."','".$lat."','".$lng."','".$nm_foto."', '".$harga."','".$nm_foto2."','".$nm_foto3."')";
         }
 
 // echo  $sql;
