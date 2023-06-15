@@ -53,10 +53,9 @@
 
 
                     <?php endif; ?>
-                    <table  class="table table-striped dt-responsive nowrap">
+                    <table id="datatable"  class="table table-striped dt-responsive nowrap">
                         <thead class="bg-primary">
                             <tr>
-                                <th>#</th>
                                 <th>Foto</th>
                                 <th nowrap="">Nama</th>
                                 <th>Alamat</th>
@@ -92,7 +91,6 @@
                      while ($d = mysqli_fetch_array($q)) :
                        ?>
                        <tr>
-                           <td width="1%"><?php echo $no++; ?></td>
                            <td>
                               <img src="<?php echo $base_url; ?>upload/<?php echo $d['gambar']; ?>" style="width:200px; height: 100px">
                           </td>
@@ -101,6 +99,7 @@
                           <td style="font-weight: bold;" nowrap=""><?php echo (empty($_REQUEST['lat'])) ? "lokasi saat dahulu": number_format($d['distance'],5)." Km"; ?> </td>
                           <td nowrap="">
                            <form action="<?php echo $base_url; ?>pemesanan/<?php echo $d['id']; ?>" method="POST">
+                               <a href="#" name="pesan" class="btn btn-success btn-sm"><i class="fa fa-exchange"></i> Detail Kos</a>
                                <button type="submit" name="pesan" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart "></i> Pesan</button>
                                <a href="https://www.google.com/maps/dir/?api=1&origin=<?php echo $_REQUEST['lat']; ?>,<?php echo $_REQUEST['lng']; ?>&destination=<?php echo $d['lat']; ?>,<?php echo $d['lng']; ?>" target="_blank" type="submit" name="pesan" class="btn btn-danger btn-sm"><i class="fa fa-car "></i> Direction</a>
                            </form>

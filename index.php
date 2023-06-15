@@ -27,6 +27,8 @@ include "config/koneksi.php";
 	<link href="<?php echo $base_url; ?>plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo $base_url; ?>plugins/toast/jquery.toast.min.css" rel="stylesheet">
   <script src="<?php echo $base_url; ?>chart/canvasjs.min.js"></script>
+ 
+
   
   <script type="text/javascript">
    function getLocation() {
@@ -160,9 +162,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
   <?php if(!empty($_SESSION['username'])) : ?>
     <?php if(in_array($_SESSION['level'], array('1'))) : ?>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i> Djikstra</a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i> Master</a>
         <ul class="dropdown-menu dropdown-main">
-          <li><a href="<?php echo $base_url; ?>master_kos">Vertex / Master Kos</a></li>
+          <li><a href="<?php echo $base_url; ?>master_kos">Master Kos</a></li>
           <li><a href="<?php echo $base_url; ?>graph">Graph</a></li>
           <li><a href="<?php echo $base_url; ?>djikstra">Djikstra</a></li>
         </ul>
@@ -255,13 +257,16 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
 <!--page script-->
 <script src="<?php echo $base_url; ?>js/float-custom.js"></script>
 <script src="<?php echo $base_url; ?>plugins/chartJs/Chart.min.js"></script>
-
+<script src="<?php echo $base_url ?>js/ckeditor.js"></script>
 
 <script type="text/javascript"></script>
 
 <script>
   $(document).ready(function () {
-   $('#datatable').dataTable();
+   $('#datatable').dataTable({order: [[5, 'desc']]});
+   ClassicEditor.create( document.querySelector( '#deskripsi' ) ).catch( error => {
+    console.error( error );
+  });
  });
 </script>
 

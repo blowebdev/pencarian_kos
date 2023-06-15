@@ -31,6 +31,18 @@
         $type_file       = $_FILES['gambar']['type'];
         $size            = $_FILES['gambar']['size'];
         $nama_gambar        = $_REQUEST['nama_gambar'];
+
+        $temp_name2       = $_FILES['gambar2']['tmp_name'];
+        $name_file2       = $_FILES['gambar2']['name'];
+        $type_file2       = $_FILES['gambar2']['type'];
+        $size2            = $_FILES['gambar2']['size'];
+        $nama_gambar2        = $_REQUEST['nama_gambar2'];
+
+        $temp_name3       = $_FILES['gambar3']['tmp_name'];
+        $name_file3       = $_FILES['gambar3']['name'];
+        $type_file3       = $_FILES['gambar3']['type'];
+        $size3            = $_FILES['gambar3']['size'];
+        $nama_gambar3        = $_REQUEST['nama_gambar3'];
 // var_dump($nama_gambar);
 
         if (empty($temp_name)) {
@@ -54,10 +66,53 @@
             $set_gambar = ",gambar='".$nm_foto."'";
         }
 
+
+         if (empty($temp_name2)) {
+            $set_gambar2 = ",gambar2='".$nama_gambar."'";
+        }else{  
+            $file_ext=strtolower(end(explode('.',$_FILES['gambar2']['name'])));
+            $expensions= array("jpeg","jpg","png");
+
+            if (in_array($file_ext,$expensions)=== false) {
+                echo "salah";
+            }elseif($size >= 3097152){
+                echo "upload maksimal 3 mb";
+            }else{
+                $Move = move_uploaded_file($temp_name2, 'upload/'.$date."-".$name_file.'');
+                if ($Move) {
+                    unlink('"upload/'.$file.'"');
+                    $nm_foto  = $date."-".$name_file;
+                }
+            }
+
+            $set_gambar2 = ",gambar2='".$nm_foto."'";
+        }
+
+         if (empty($temp_name3)) {
+            $set_gambar3 = ",gambar3='".$nama_gambar."'";
+        }else{  
+            $file_ext=strtolower(end(explode('.',$_FILES['gambar3']['name'])));
+            $expensions= array("jpeg","jpg","png");
+
+            if (in_array($file_ext,$expensions)=== false) {
+                echo "salah";
+            }elseif($size >= 3097152){
+                echo "upload maksimal 3 mb";
+            }else{
+                $Move = move_uploaded_file($temp_name3, 'upload/'.$date."-".$name_file.'');
+                if ($Move) {
+                    unlink('"upload/'.$file.'"');
+                    $nm_foto2  = $date."-".$name_file;
+                }
+            }
+
+            $set_gambar3 = ",gambar3='".$nm_foto2."'";
+        }
+
         if(!empty($_REQUEST['id'])){
-            $sql = "UPDATE m_kos SET  kode='".$kode."', nama='".$nama."', id_mitra='".$id_mitra."', harga='".$harga."', deskripsi='".$deskripsi."', alamat='".$alamat."', lat='".$lat."', lng='".$lng."', deskripsi='".$deskripsi."' ".$set_gambar." WHERE id='".$_REQUEST['id']."'";
+            $sql = "UPDATE m_kos SET  kode='".$kode."', nama='".$nama."', id_mitra='".$id_mitra."', harga='".$harga."', deskripsi='".$deskripsi."', alamat='".$alamat."', lat='".$lat."', lng='".$lng."', deskripsi='".$deskripsi."' ".$set_gambar.$set_gambar2.$set_gambar3." WHERE id='".$_REQUEST['id']."'";
         }else{
-            $sql = "INSERT INTO `m_kos`(`kode`,`nama`, `id_mitra`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`, `harga`) VALUES ('".$kode."','".$nama."','".$id_mitra."','".$deskripsi."','".$alamat."','".$lat."','".$lng."','".$nm_foto."', '".$harga."')";
+            $sql = "INSERT INTO `m_kos`(`kode`,`nama`, `id_mitra`, `deskripsi`, `alamat`, `lat`, `lng`, `gambar`, `harga`, `gambar2`,`gambar3`) VALUES ('".$kode."','".$nama."','".$id_mitra."','".$deskripsi."','".$alamat."','".$lat."','".$lng."','".$nm_foto."', '".$harga."','".$gambar2."','".$gambar3."')";
         }
 
 // echo  $sql;
@@ -176,96 +231,142 @@
                                         <textarea class="form-control" id="detail_almat" name="alamat"><?php echo $datane['alamat']; ?></textarea>
                                     </div>
                                 </div>
+                                <style type="text/css">
+                                    .ck-editor__editable {
+                                        min-height: 500px;
+                                    }
+                                </style>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Deskripsi Kos</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="deskripsi"  required=""><?php echo $datane['deskripsi']; ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label" for="example-fileinput">Gambar</label>
+                                        <textarea class="form-control" name="deskripsi" id="deskripsi" rows="50"  required="">
+                                            <?php if(empty($datane['deskripsi'])) : ?>
+                                            <b>DESKRIPSI KOS</b>
+                                            <p>
+                                                Selamat datang di Kos <i>Diisi manual</i>, tempat tinggal yang sempurna untuk para pencari ketenangan dan kenyamanan. Terletak di jantung kota, Kos <i>Diisi manual</i> adalah oase modern yang dirancang dengan keindahan dan kualitas tinggi. <br>
 
-                                    <div class="col-sm-10">
-                                        <?php if (!empty($datane['gambar'])) :?>
-                                            <img src="<?php echo $base_url.'/upload/'.$datane['gambar']; ?>"  style="width: 300px; height: 300px"/>
-                                            <input type="file" class="form-control" name="gambar">
-                                            <input type="hidden" class="form-control" name="nama_gambar" value="<?php echo $datane['gambar']; ?>">
-                                            <?php else : ?>
-                                                <input type="file" class="form-control" name="gambar" required="">
-                                            <?php endif; ?>
+                                                Setiap kamar kami dirancang dengan teliti untuk memberikan suasana yang menenangkan dan nyaman setelah hari yang panjang. Dengan perpaduan sempurna antara sentuhan kontemporer dan desain minimalis, setiap sudut kamar mengundang Anda untuk bersantai dan bersenang-senang.
+                                            </p>
+                                            <b>FASILITAS PARKIR</b> <br>
+                                              ✔️ DIISI SENDIRI <br>
+                                             <b>FASILITAS KAMAR</b> <br>
+                                              ✔️ DIISI SENDIRI <br>
+                                               <b>FASILITAS KAMAR MANDI</b> <br>
+                                              ✔️ DIISI SENDIRI <br>
+                                               <b>TIPE KAMAR</b> <br>
+                                              ✔️ DIISI SENDIRI <br>
+                                               <b>FASILITAS LAIN - LAIN</b> <br>
+                                              ✔️ DIISI SENDIRI <br>
+                                              <b>PERATURAN KOS</b> <br>
+                                              ✔️ DIISI SENDIRI <br>
+
+                                              
+
+                                           
+                                            <?php else : echo $datane['deskripsi']; endif; ?></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"></label>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 control-label" for="example-fileinput">Gambar</label>
+
                                         <div class="col-sm-10">
-                                            <a href="<?php echo $base_url; ?>master_kos" class="btn btn-danger">Kembali</a>
-                                            <button class="btn btn-primary" type="submit" name="simpan">Simpan</button>
+                                            <?php if (!empty($datane['gambar'])) :?>
+                                                <img src="<?php echo $base_url.'/upload/'.$datane['gambar']; ?>"  style="width: 300px; height: 300px"/>
+                                                <input type="file" class="form-control" name="gambar">
+                                                <input type="hidden" class="form-control" name="nama_gambar" value="<?php echo $datane['gambar']; ?>">
+                                                <?php else : ?>
+                                                    <input type="file" class="form-control" name="gambar" required="">
+                                                <?php endif; ?>
+
+
+                                                <?php if (!empty($datane['gambar2'])) :?>
+                                                <img src="<?php echo $base_url.'/upload/'.$datane['gambar2']; ?>"  style="width: 300px; height: 300px"/>
+                                                <input type="file" class="form-control" name="gambar2">
+                                                <input type="hidden" class="form-control" name="nama_gambar2" value="<?php echo $datane['gambar2']; ?>">
+                                                <?php else : ?>
+                                                    <input type="file" class="form-control" name="gambar2" required="">
+                                                <?php endif; ?>
+
+                                                 <?php if (!empty($datane['gambar3'])) :?>
+                                                <img src="<?php echo $base_url.'/upload/'.$datane['gambar3']; ?>"  style="width: 300px; height: 300px"/>
+                                                <input type="file" class="form-control" name="gambar3">
+                                                <input type="hidden" class="form-control" name="nama_gambar3" value="<?php echo $datane['gambar3']; ?>">
+                                                <?php else : ?>
+                                                    <input type="file" class="form-control" name="gambar3" required="">
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </form>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"></label>
+                                            <div class="col-sm-10">
+                                                <a href="<?php echo $base_url; ?>master_kos" class="btn btn-danger">Kembali</a>
+                                                <button class="btn btn-primary" type="submit" name="simpan">Simpan</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
 
 
-            <script>
-                var map;
-                var marker;
+                <script>
+                    var map;
+                    var marker;
 
-                function initMap() {
-                    var initialLatLng = { lat: -7.561479, lng: 112.2592315 };
+                    function initMap() {
+                        var initialLatLng = { lat: -7.561479, lng: 112.2592315 };
 
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: initialLatLng,
-                        zoom: 12
-                    });
-                    marker = new google.maps.Marker({
-                        position: initialLatLng,
-                        map: map,
-                        draggable: true
-                    });
-                    marker.addListener('dragend', function () {
-                        updateMarkerPosition(marker.getPosition());
-                    });
-                    var input = document.getElementById('searchTextField');
-                    var autocomplete = new google.maps.places.Autocomplete(input);
-                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                        var place = autocomplete.getPlace();
-                        var lat = place.geometry.location.lat();
-                        var long = place.geometry.location.lng();
-                        var panjang = place.address_components.length;
-                        var index =place.address_components;
-                        geocodeAddress(place);
-                        document.getElementById('city2').value = place.name;
-                        document.getElementById('cityLat').value = place.geometry.location.lat();
-                        document.getElementById('cityLng').value = place.geometry.location.lng();
-                    });
-                }
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: initialLatLng,
+                            zoom: 12
+                        });
+                        marker = new google.maps.Marker({
+                            position: initialLatLng,
+                            map: map,
+                            draggable: true
+                        });
+                        marker.addListener('dragend', function () {
+                            updateMarkerPosition(marker.getPosition());
+                        });
+                        var input = document.getElementById('searchTextField');
+                        var autocomplete = new google.maps.places.Autocomplete(input);
+                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                            var place = autocomplete.getPlace();
+                            var lat = place.geometry.location.lat();
+                            var long = place.geometry.location.lng();
+                            var panjang = place.address_components.length;
+                            var index =place.address_components;
+                            geocodeAddress(place);
+                            document.getElementById('city2').value = place.name;
+                            document.getElementById('cityLat').value = place.geometry.location.lat();
+                            document.getElementById('cityLng').value = place.geometry.location.lng();
+                        });
+                    }
 
-                function geocodeAddress(place) {
-                    var geocoder = new google.maps.Geocoder();
-                    var address = document.getElementById('searchTextField').value;
-                    geocoder.geocode({ 'address': address }, function (results, status) {
-                        if (status === 'OK') {
-                            var location = results[0].geometry.location;
-                            map.setCenter(location);
-                            marker.setPosition(location);
-                            updateMarkerPosition(location);
-                        } else {
-                            alert('Geocode was not successful for the following reason: ' + status);
-                        }
-                    });
-                }
+                    function geocodeAddress(place) {
+                        var geocoder = new google.maps.Geocoder();
+                        var address = document.getElementById('searchTextField').value;
+                        geocoder.geocode({ 'address': address }, function (results, status) {
+                            if (status === 'OK') {
+                                var location = results[0].geometry.location;
+                                map.setCenter(location);
+                                marker.setPosition(location);
+                                updateMarkerPosition(location);
+                            } else {
+                                alert('Geocode was not successful for the following reason: ' + status);
+                            }
+                        });
+                    }
 
-                function updateMarkerPosition(latLng) {
-                    document.getElementById('latitudeInput').value = latLng.lat();
-                    document.getElementById('longitudeInput').value = latLng.lng();
-                    document.getElementById('detail_almat').value = document.getElementById('searchTextField').value;
-                }
+                    function updateMarkerPosition(latLng) {
+                        document.getElementById('latitudeInput').value = latLng.lat();
+                        document.getElementById('longitudeInput').value = latLng.lng();
+                        document.getElementById('detail_almat').value = document.getElementById('searchTextField').value;
+                    }
 
-                google.maps.event.addDomListener(window, 'load', initialize);
-            </script>
+                    google.maps.event.addDomListener(window, 'load', initialize);
+                </script>
