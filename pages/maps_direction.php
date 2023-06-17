@@ -1,4 +1,8 @@
 <a href="kos" class="btn btn-danger">Kembali</a> <br>
+
+<?php if(empty($_REQUEST['lat'])) : ?>
+    <div class="alert alert-danger">Mohon maaf lat long harus diisi terlebih dahulu</div>
+<?php else : ?>
 <div class="alert alert-success">
 
     Direction rute terdekat dari <b><?php echo $_REQUEST['alamat']; ?></b> Ke kos yang terdebar di database.
@@ -115,3 +119,4 @@ $mark = json_encode($damarker);
         google.maps.event.addDomListener(window, 'load', initMap);
     </script>
 
+<?php endif; ?>

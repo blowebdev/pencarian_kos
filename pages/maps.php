@@ -29,7 +29,8 @@
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
                center: { lat: -7.5606744, lng: 111.9295565 },
-               zoom: 10
+               zoom: 10,
+               
            });
 
             // Create markers and popups

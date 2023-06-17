@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jun 2023 pada 08.40
+-- Waktu pembuatan: 17 Jun 2023 pada 09.28
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -147,7 +147,34 @@ CREATE TABLE `m_pelanggan` (
 INSERT INTO `m_pelanggan` (`id`, `nama`, `hp`, `email`, `alamat`, `username`, `password`, `status`, `level`) VALUES
 (4, 'Zeaid', '62847758857676', 'email1@gmail.com', 'Alamat Jombang', 'user1', '202cb962ac59075b964b07152d234b70', '', 0),
 (5, 'Yaqin', '6287866163545', 'email@gmail.com', 'Jombang', 'user2', '202cb962ac59075b964b07152d234b70', '', 0),
-(6, 'User', '62859950069', 'email@gmail.com', 'Alamat', 'mitra', '202cb962ac59075b964b07152d234b70', '', 0);
+(8, 'Mahardhika Arya Bimnantara', '62847758857676', 'email@gmail.com', 'Jombang', 'ali', '202cb962ac59075b964b07152d234b70', '', 0),
+(9, 'Mahardhika Arya Bimnantara', '62847758857676', 'email@gmail.com', 'Jombang', 'ali', '202cb962ac59075b964b07152d234b70', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `m_review`
+--
+
+CREATE TABLE `m_review` (
+  `id` int(11) NOT NULL,
+  `kode_transaksi` varchar(113) NOT NULL,
+  `lokasi` int(11) NOT NULL,
+  `jarak` int(11) NOT NULL,
+  `pesan_mudah` int(11) NOT NULL,
+  `aplikasi` int(11) NOT NULL,
+  `ui` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_kos` int(11) NOT NULL,
+  `catatan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `m_review`
+--
+
+INSERT INTO `m_review` (`id`, `kode_transaksi`, `lokasi`, `jarak`, `pesan_mudah`, `aplikasi`, `ui`, `id_user`, `id_kos`, `catatan`) VALUES
+(2, 'TRXAB5762C8', 4, 4, 4, 5, 4, 4, 2, 'Ok');
 
 -- --------------------------------------------------------
 
@@ -167,15 +194,18 @@ CREATE TABLE `m_transaksi` (
   `total_bulan` int(11) NOT NULL,
   `nama` text NOT NULL,
   `hp` int(11) NOT NULL,
-  `grand_total` int(11) NOT NULL
+  `grand_total` int(11) NOT NULL,
+  `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `m_transaksi`
 --
 
-INSERT INTO `m_transaksi` (`id`, `id_pelanggan`, `id_kos`, `kode_transaksi`, `tgl_pemesanan`, `tgl_kunjung`, `keterangan`, `harga`, `total_bulan`, `nama`, `hp`, `grand_total`) VALUES
-(2, 4, 1, 'TRXED2F1A0C', '2023-06-05 00:00:00', '2023-06-05', '', 10000, 5, 'Zeaid', 2147483647, 50000);
+INSERT INTO `m_transaksi` (`id`, `id_pelanggan`, `id_kos`, `kode_transaksi`, `tgl_pemesanan`, `tgl_kunjung`, `keterangan`, `harga`, `total_bulan`, `nama`, `hp`, `grand_total`, `status`) VALUES
+(3, 4, 2, 'TRXAB5762C8', '2023-06-17 00:00:00', '2023-06-17', '', 40000, 2, 'Zeaid', 2147483647, 80000, 'SETUJU'),
+(4, 4, 2, 'TRX477FD799', '2023-06-17 00:00:00', '2023-06-17', '', 40000, 5, 'Zeaid', 2147483647, 200000, ''),
+(5, 4, 2, 'TRX70E947C4', '2023-06-17 00:00:00', '2023-06-17', '', 40000, 11, 'Zeaid', 2147483647, 440000, 'PROSES');
 
 -- --------------------------------------------------------
 
@@ -227,6 +257,12 @@ ALTER TABLE `m_pelanggan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `m_review`
+--
+ALTER TABLE `m_review`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `m_transaksi`
 --
 ALTER TABLE `m_transaksi`
@@ -264,13 +300,19 @@ ALTER TABLE `m_mitra`
 -- AUTO_INCREMENT untuk tabel `m_pelanggan`
 --
 ALTER TABLE `m_pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `m_review`
+--
+ALTER TABLE `m_review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `m_transaksi`
 --
 ALTER TABLE `m_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `m_user`

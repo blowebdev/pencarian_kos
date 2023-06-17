@@ -155,9 +155,9 @@
                     <form method="POST" action="" class="form-horizontal" enctype="multipart/form-data">
                         <fieldset>
                          <div class="form-group">
-                            <label class="col-sm-2 control-label">Kode Huruf</label>
+                            <label class="col-sm-2 control-label">Kode</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="kode" placeholder="A, B , C , D , E , F" value="<?php echo $datane['kode']; ?>" required="">
+                                <input type="text" readonly="" class="form-control" name="kode" value="<?php echo (!empty($datane['kode']))? : rand(1,9999); ?>" placeholder="A, B , C , D , E , F" value="<?php echo $datane['kode']; ?>" required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -277,6 +277,7 @@
                                                 <?php else : ?>
                                                     <input type="file" class="form-control" name="gambar" required="">
                                                 <?php endif; ?>
+                                                <i>Upload maksimal 5 Mb</i><br>
 
 
                                                 <?php if (!empty($datane['gambar2'])) :?>
@@ -286,6 +287,7 @@
                                                 <?php else : ?>
                                                     <input type="file" class="form-control" name="gambar2" required="">
                                                 <?php endif; ?>
+                                                <i>Upload maksimal 5 Mb</i><br>
 
                                                  <?php if (!empty($datane['gambar3'])) :?>
                                                 <img src="<?php echo $base_url.'/upload/'.$datane['gambar3']; ?>"  style="width: 300px; height: 300px"/>
@@ -294,6 +296,7 @@
                                                 <?php else : ?>
                                                     <input type="file" class="form-control" name="gambar3" required="">
                                                 <?php endif; ?>
+                                                <br><i>Upload maksimal 5 Mb</i>
                                             </div>
                                         </div>
                                         <div class="form-group">

@@ -42,8 +42,8 @@ include "config/koneksi.php";
   function showPosition(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
-    document.getElementById('latitudeInput').value = lat;
-    document.getElementById('longitudeInput').value = lng;
+    document.getElementById('latitudeInput2').value = lat;
+    document.getElementById('longitudeInput2').value = lng;
   }
 
   window.onload = getLocation;
@@ -178,7 +178,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
         <a href="<?php echo $base_url; ?>histori_pemesanan" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan</a>
       </li>
       <li class="dropdown">
-        <a href="<?php echo $base_url; ?>statistik" onclick="alert('Proses pengembangan')" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bar-chart"></i> Laporan</a>
+        <a href="<?php echo $base_url; ?>statistik" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bar-chart"></i> Laporan</a>
       </li>
     <?php endif; ?>
 
@@ -200,7 +200,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
   </li>
   <?php else : ?>
     <li class="dropdown">
-      <a href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-question"></i>Faq</a>
+      <a href="<?php echo $base_url; ?>faq" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-question"></i>Faq</a>
+    </li>
+    <li class="dropdown">
+      <a href="<?php echo $base_url; ?>tentang" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-info-circle"></i> Tentang</a>
     </li>
     <li class="dropdown">
       <a href="<?php echo $base_url; ?>login" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-login"></i> Login</a>

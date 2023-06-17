@@ -84,10 +84,10 @@ return $transactionCode;
 function status($txt){
     if ($txt=='PROSES') {
         return "<label class='text-warning'>PROSES</label>";
-    }elseif ($txt=='BATAL') {
+    }elseif ($txt=='TOLAK') {
          return "<label class='text-danger'>BATAL</label>";
-    }elseif($txt=='LUNAS'){
-        return "<label class='text-success'>LUNAS</label>";
+    }elseif($txt=='SETUJU'){
+        return "<label class='text-success'>SETUJU</label>";
     }
 }
 

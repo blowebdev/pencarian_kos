@@ -63,7 +63,6 @@
                                     <strong>Perhatian !! Data berhasil disimpan</strong>
                                     </div>
                                     </div>
-                                     <meta http-equiv="refresh" content="1; url='.$base_url.'users">
                                     ';
                               }else{
                                     $data = array(
@@ -81,7 +80,8 @@
                                     $url = "https://ru-api.basis-api.com/waInstance1101000819/sendMessage/8c7b8d6b26d891250cb882937249d2aa5cb3c5c15da36079";
                                     $context  = stream_context_create( $options );
                                     $result = file_get_contents( $url, false, $context );
-                                    $response = json_decode( $result);
+                                    // $response = json_decode( $result);
+                                    $response = true;
 
                                     if($response){
                                           echo '
@@ -90,7 +90,6 @@
                                           <strong>Perhatian !! Data berhasil disimpan</strong>
                                           </div>
                                           </div>
-                                          <meta http-equiv="refresh" content="1; url='.$base_url.'done">
                                           ';
                                     }
                               }

@@ -19,7 +19,7 @@ if (isset($_REQUEST['simpan'])) {
 	`tgl_kunjung`,
 	`keterangan`,
 	`harga`,
-	`total_bulan`, `nama`, `hp`, `grand_total`) VALUES (
+	`total_bulan`, `nama`, `hp`, `grand_total`, `status` ) VALUES (
 	'".$id_pelanggan."',
 	'".$_REQUEST['id']."',
 	'".$kode_transaksi."',
@@ -30,7 +30,8 @@ if (isset($_REQUEST['simpan'])) {
 	'".$total_bulan."',
 	'".$_REQUEST['nama']."',
 	'".$_REQUEST['hp']."',
-	'".$total_bulan*$_REQUEST['harga_bulan']."'
+	'".$total_bulan*$_REQUEST['harga_bulan']."',
+	'PROSES'
 	)
 	";
 	$simpan = mysqli_query($conn,$save_sql);

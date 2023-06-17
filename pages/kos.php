@@ -20,9 +20,10 @@
             <form action="" method="POST">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <input type="text" id="searchTextField" name="alamat" placeholder="Masukkan alamat">
-                        <input type="hidden" name="lat" id="latitudeInput">
-                        <input type="hidden" name="lng" id="longitudeInput">
+                        <input type="text" id="searchTextField" name="alamat" placeholder="Masukkan alamat" required="">
+                        <input type="hidden" name="lat" id="latitudeInput2">
+                        <input type="hidden" name="lng" id="longitudeInput2">
+                        <i>Input alamat yang sesuai</i>
                     </div>
                     <div class="modal-body" id="map" style="height: 400px !important"></div>
                     <div class="modal-footer">
@@ -57,7 +58,7 @@
                         <thead class="bg-primary">
                             <tr>
                                 <th>Foto</th>
-                                <th nowrap="">Nama</th>
+                                <th>Nama</th>
                                 <th>Alamat</th>
                                 <th nowrap="">Harga / Bulan</th>
                                 <th nowrap="">Rekomendasi <br>Jarak/Rute<br> Paling Dekat</th>
@@ -94,7 +95,7 @@
                            <td>
                               <img src="<?php echo $base_url; ?>upload/<?php echo $d['gambar']; ?>" style="width:200px; height: 100px">
                           </td>
-                          <td nowrap="" style="font-weight: bold;"><u><?php echo $d['nama']; ?></u></td>                          <td><?php echo $d['alamat']; ?></td>
+                          <td style="font-weight: bold;"><u><?php echo $d['nama']; ?></u></td>                          <td><?php echo $d['alamat']; ?></td>
                           <td>Rp. <?php echo number_format($d['harga']); ?></td>
                           <td style="font-weight: bold;" nowrap=""><?php echo (empty($_REQUEST['lat'])) ? "lokasi saat dahulu": number_format($d['distance'],5)." Km"; ?> </td>
                           <td nowrap="">
@@ -164,8 +165,8 @@
     }
 
     function updateMarkerPosition(latLng) {
-        document.getElementById('latitudeInput').value = latLng.lat();
-        document.getElementById('longitudeInput').value = latLng.lng();
+        document.getElementById('latitudeInput2').value = latLng.lat();
+        document.getElementById('longitudeInput2').value = latLng.lng();
         document.getElementById('detail_almat').value = document.getElementById('searchTextField').value;
     }
 
