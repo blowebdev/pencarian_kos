@@ -285,7 +285,7 @@
                                                 <input type="file" class="form-control" name="gambar2">
                                                 <input type="hidden" class="form-control" name="nama_gambar2" value="<?php echo $datane['gambar2']; ?>">
                                                 <?php else : ?>
-                                                    <input type="file" class="form-control" name="gambar2" required="">
+                                                    <input type="file" class="form-control" name="gambar2">
                                                 <?php endif; ?>
                                                 <i>Upload maksimal 5 Mb</i><br>
 
@@ -294,7 +294,7 @@
                                                 <input type="file" class="form-control" name="gambar3">
                                                 <input type="hidden" class="form-control" name="nama_gambar3" value="<?php echo $datane['gambar3']; ?>">
                                                 <?php else : ?>
-                                                    <input type="file" class="form-control" name="gambar3" required="">
+                                                    <input type="file" class="form-control" name="gambar3">
                                                 <?php endif; ?>
                                                 <br><i>Upload maksimal 5 Mb</i>
                                             </div>

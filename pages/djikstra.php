@@ -1,119 +1,63 @@
- <style>
- 	#map {
- 		height: 400px;
- 		width: 100%;
- 	}
- </style>
- <div class="row">
- 	<div class="col-sm-12" >
- 		<div class="panel panel-teal">
- 			<div class="panel-heading">
- 				Maps Djikstra
- 			</div>
- 			<div class="panel-body" id="maps">
- 				<div id="map"  style="font-weight: bold"><center>Loading...</center></div>
- 			</div>
- 		</div>
- 	</div>
- </div>
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <h1>Rute Kos</h1>
+    <div id="map"></div>
+
+
+
+
 
 
     <?php 
-    function hitungJarak($lat1, $lon1, $lat2, $lon2) {
-            $r = 6371; // Radius Bumi dalam kilometer
-
-            $dlat = deg2rad($lat2 - $lat1);
-            $dlon = deg2rad($lon2 - $lon1);
-
-            $a = sin($dlat / 2) * sin($dlat / 2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dlon / 2) * sin($dlon / 2);
-            $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-
-            $jarak = $r * $c; // Jarak dalam kilometer
-
-            return $jarak;
-        }
-    function getEdges($connection) {
-            $edges = array();
-
-            $query = mysqli_query($conn, 'SELECT * FROM m_kos');
-            while ($row = mysqli_fetch_assoc($query)) {
-                $node1 = $row['id'];
-
-                $subquery = mysqli_query($conn, 'SELECT * FROM m_kos WHERE id <> ' . $node1);
-                while ($subrow = mysqli_fetch_assoc($subquery)) {
-                    $node2 = $subrow['id'];
-
-                    // Hitung jarak antara dua titik menggunakan Haversine Formula
-                    $distance = hitungJarak($row['lat'], $row['lng'], $subrow['lat'], $subrow['lng']);
-
-                    // Tambahkan data sisi ke array edges
-                    $edges[] = array(
-                        'node1' => $node1,
-                        'node2' => $node2,
-                        'distance' => $distance
-                    );
-                }
-            }
-
-            return $edges;
-        }
-
-        $graphRow = getEdges($connection);
-
-        foreach ($graphRow as $key => $d) {
-            $sql = "INSERT INTO m_graph (node_1,node_2, jarak) VALUES ('".$d['node1']."','".$d['node2']."','".$d['distance']."');";
-            // echo  $sql;
-            // $t = mysqli_query($conn, $sql);
-            // var_dump($t);
-        }
-
         // $arr = array();
-        $arr_graph = "";
-        $query = mysqli_query($conn,"SELECT * FROM m_kos");
-        while ($data = mysqli_fetch_array($query)) {
-            $bantu2 = "";
-            $query2 = mysqli_query($conn,"SELECT * FROM m_graph WHERE node_1 = '".$data['id']."' ORDER BY node_2 ASC");
-            while ($data2 = mysqli_fetch_array($query2)) {
-                $bantu2 .= "'".$data2['node_2']."': ".$data2['jarak'].",";
-            }
-            $arr_graph.="'".$data['id']."' : {".substr($bantu2, 0, -1)."},";
-        }
+        // $arr_graph = "";
+        // $query = mysqli_query($conn,"SELECT * FROM m_kos");
+        // while ($data = mysqli_fetch_array($query)) {
+        //     $bantu2 = "";
+        //     $query2 = mysqli_query($conn,"SELECT * FROM m_graph WHERE node_1 = '".$data['id']."' ORDER BY node_2 ASC");
+        //     while ($data2 = mysqli_fetch_array($query2)) {
+        //         $bantu2 .= "'".$data2['node_2']."': ".$data2['jarak'].",";
+        //     }
+        //     $arr_graph.="'".$data['id']."' : {".substr($bantu2, 0, -1)."},";
+        // }
 
-        $kosbantu = "";
-        $DataKos = mysqli_query($conn,"SELECT * FROM m_kos");
-        while ($dakos = mysqli_fetch_array($DataKos)) {
-            $kosbantu .="'".$dakos['id']."': {'nama': '<b> (".$dakos['kode'].") </b> ".$dakos['nama']."', 'lat' : ".$dakos['lat'].", 'lng' : ".$dakos['lng']." },";
-        }
+        // $kosbantu = "";
+        // $DataKos = mysqli_query($conn,"SELECT * FROM m_kos");
+        // while ($dakos = mysqli_fetch_array($DataKos)) {
+        //     $kosbantu .="'".$dakos['id']."': {'nama': '".$dakos['nama']."', 'lat' : ".$dakos['lat'].", 'lng' : ".$dakos['lng']." },";
+        // }
 
     ?>
 
     <script>
         function initMap() {
             // Data graf berdasarkan latitude dan longitude
-             var graph ={ <?php echo substr($arr_graph,0,-1); ?>};
               //Data graf berdasarkan latitude dan longitude
-            // var graph = {
-            //     '1': { '2': 5, '3': 3 },
-            //     '2': { '1': 5, '4': 2 },
-            //     '3': { '1': 3, '4': 1 },
-            //     '4': { '2': 2, '3': 1, '5': 4 },
-            //     '5': { '5': 4 }
-            // };
+            var graph = {
+                '1': { '2': 5, '3': 3 },
+                '2': { '1': 5, '4': 2 },
+                '3': { '1': 3, '4': 1 },
+                '4': { '2': 2, '3': 1, '5': 4 },
+                '5': { '5': 4 }
+            };
 
 
 
             // Data koordinat latitude dan longitude untuk setiap kos
-            // var kosData = {
-            //     '1': { 'nama': 'Kos A', 'lat': -7.66658021256, 'lng': 112.29991228259985 }, //Bareng
-            //     '2': { 'nama': 'Kos B', 'lat': -7.583162618675641, 'lng': 112.23320417178812 }, //diwek
-            //     '3': { 'nama': 'Kos C', 'lat': -7.5301093643827794, 'lng': 112.29295089686751 }, //peterongan
-            //     '4': { 'nama': 'Kos D', 'lat': -7.724378108463288, 'lng': 112.3571057733738 }, //wonosalam
-            //     '5': { 'nama': 'Kos E', 'lat': -7.574184945369275, 'lng': 112.35647317177406 },
-            // };
-
             var kosData = {
-                <?php echo $kosbantu; ?>
+                '1': { 'nama': 'Kos A', 'lat': -7.66658021256, 'lng': 112.29991228259985 }, //Bareng
+                '2': { 'nama': 'Kos B', 'lat': -7.583162618675641, 'lng': 112.23320417178812 }, //diwek
+                '3': { 'nama': 'Kos C', 'lat': -7.5301093643827794, 'lng': 112.29295089686751 }, //peterongan
+                '4': { 'nama': 'Kos D', 'lat': -7.724378108463288, 'lng': 112.3571057733738 }, //wonosalam
+                '5': { 'nama': 'Kos E', 'lat': -7.574184945369275, 'lng': 112.35647317177406 },
             };
+
+           
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: -7.5606744, lng: 111.9295565 },
@@ -219,7 +163,7 @@
             }
 
             var start = '1'; // Simpul awal
-            var end = '8'; // Simpul tujuan
+            var end = '5'; // Simpul tujuan
 
             // Mencari rute terpendek menggunakan Algoritma Dijkstra
             var shortestPath = dijkstra(graph, start, end);

@@ -20,10 +20,10 @@
             <form action="" method="POST">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <input type="text" id="searchTextField" name="alamat" placeholder="Masukkan alamat" required="">
+                        <input type="text" id="searchTextField" name="alamat" placeholder="Masukkan alamat lengkap" required="">
                         <input type="hidden" name="lat" id="latitudeInput2">
                         <input type="hidden" name="lng" id="longitudeInput2">
-                        <i>Input alamat yang sesuai</i>
+                        <i>Input alamat yang lengkap</i>
                     </div>
                     <div class="modal-body" id="map" style="height: 400px !important"></div>
                     <div class="modal-footer">
@@ -95,7 +95,18 @@
                            <td>
                               <img src="<?php echo $base_url; ?>upload/<?php echo $d['gambar']; ?>" style="width:200px; height: 100px">
                           </td>
-                          <td style="font-weight: bold;"><u><?php echo $d['nama']; ?></u></td>                          <td><?php echo $d['alamat']; ?></td>
+                          <td style="font-weight: bold;"><?php echo $d['nama']; ?> <br>
+                            <?php 
+                                $res = mysqli_query($conn,"SELECT (a.lokasi/5+a.jarak/5+a.pesan_mudah/5+a.aplikasi/5+a.ui/5) as tot , a.catatan, b.nama FROM `m_review` as a 
+                                    LEFT JOIN m_pelanggan as b ON a.id_user = b.id
+                                 WHERE a.id_kos='".$d['id']."'");
+                                while($total = mysqli_fetch_array($res)) :
+                                    for ($i=1; $i <=$total['tot'] ; $i++) { 
+                                        echo "<i class='fa fa-star-o' style='color:orange;'></i>";
+                                    }echo "<b> (".number_format($total['tot'],1).")</b>";
+                            endwhile; ?>
+                          </td>                          
+                          <td><?php echo $d['alamat']; ?></td>
                           <td>Rp. <?php echo number_format($d['harga']); ?></td>
                           <td style="font-weight: bold;" nowrap=""><?php echo (empty($_REQUEST['lat'])) ? "lokasi saat dahulu": number_format($d['distance'],5)." Km"; ?> </td>
                           <td nowrap="">
