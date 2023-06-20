@@ -87,7 +87,7 @@
                      <div class="form-group">
                         <label class="col-sm-2 control-label">Pembayaran</label>
                         <div class="col-sm-6">
-                            <select class="form-control">
+                            <select class="form-control" name="pembayaran" required="">
                                 <option value="">Pilih pembayaran</option>
                                 <option value="cash_mitra">Cash Dilokasi</option>
                             </select>
