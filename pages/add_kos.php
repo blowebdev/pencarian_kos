@@ -144,6 +144,10 @@
     if (!empty($_REQUEST['id'])) {
         $datane = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM m_kos WHERE id='".$_REQUEST['id']."'"));
     }
+    $huruf_trakhir_res = mysqli_query($conn,"SELECT * FROM m_kos ORDER BY kode DESC");
+    $huruf_terakhir= mysqli_fetch_array($huruf_trakhir_res);
+    $p = strtoupper($huruf_terakhir['kode']);
+    $currentPrimaryKey = generatePrimaryKey($p);
     ?>
     <div class="row">
         <div class="col-sm-12">
@@ -157,7 +161,7 @@
                          <div class="form-group">
                             <label class="col-sm-2 control-label">Kode</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly="" class="form-control" name="kode" value="<?php echo (!empty($datane['kode']))? : rand(1,9999); ?>" placeholder="A, B , C , D , E , F" value="<?php echo $datane['kode']; ?>" required="">
+                                <input type="text" readonly="" class="form-control" name="kode" value="<?php echo (!empty($datane['kode']))? :  $currentPrimaryKey; ?>" placeholder="A, B , C , D , E , F" required="">
                             </div>
                         </div>
                         <div class="form-group">

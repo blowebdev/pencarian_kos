@@ -14,7 +14,6 @@
             <strong>Perhatian !! Data berhasil disimpan</strong>
             </div>
             </div>
-            <meta http-equiv="refresh" content="1">
             ';
         }else{
             echo '
@@ -55,7 +54,7 @@
                                 <select class="form-control" name="node_1" required="" id="node_1">
                                     <option value="">Pilih Node 1</option>
                                     <?php 
-                                    $pengguna = mysqli_query($conn,"SELECT * FROM m_kos");
+                                    $pengguna = mysqli_query($conn,"SELECT * FROM m_kos ORDER BY kode ASC");
                                     foreach ($pengguna as $key => $damit):
                                         ?>
 
@@ -72,7 +71,7 @@
                                         <select class="form-control" name="node_2"  required="" id="node_2" onchange="check_jarak()">
                                             <option value="">Pilih Node 2</option>
                                             <?php 
-                                            $pengguna = mysqli_query($conn,"SELECT * FROM m_kos");
+                                            $pengguna = mysqli_query($conn,"SELECT * FROM m_kos ORDER BY kode ASC");
                                             foreach ($pengguna as $key => $damit):
                                                 ?>
 

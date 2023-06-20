@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jun 2023 pada 08.31
+-- Waktu pembuatan: 20 Jun 2023 pada 09.42
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -39,12 +39,16 @@ CREATE TABLE `m_graph` (
 --
 
 INSERT INTO `m_graph` (`id`, `node_1`, `node_2`, `jarak`) VALUES
-(228, '2', '10', 1.56),
-(229, '10', '11', 0.29),
-(230, '11', '10', 1),
-(231, '11', '12', 2.45),
-(232, '12', '13', 0.17),
-(233, '13', '14', 3.84);
+(234, '11', '10', 2),
+(235, '11', '12', 4),
+(236, '10', '11', 2),
+(237, '10', '12', 1),
+(238, '10', '13', 5),
+(239, '12', '11', 4),
+(240, '12', '10', 1),
+(241, '12', '13', 3),
+(242, '13', '10', 5),
+(243, '13', '12', 3);
 
 -- --------------------------------------------------------
 
@@ -268,7 +272,7 @@ ALTER TABLE `m_user`
 -- AUTO_INCREMENT untuk tabel `m_graph`
 --
 ALTER TABLE `m_graph`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT untuk tabel `m_kos`
