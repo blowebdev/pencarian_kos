@@ -97,7 +97,7 @@
                           </td>
                           <td style="font-weight: bold;"><?php echo $d['nama']; ?> <br>
                             <?php 
-                                $res = mysqli_query($conn,"SELECT (a.lokasi/5+a.jarak/5+a.pesan_mudah/5+a.aplikasi/5+a.ui/5) as tot , a.catatan, b.nama FROM `m_review` as a 
+                                $res = mysqli_query($conn,"SELECT avg(a.lokasi/5+a.jarak/5+a.pesan_mudah/5+a.aplikasi/5+a.ui/5) as tot , a.catatan, b.nama FROM `m_review` as a 
                                     LEFT JOIN m_pelanggan as b ON a.id_user = b.id
                                  WHERE a.id_kos='".$d['id']."'");
                                 while($total = mysqli_fetch_array($res)) :
