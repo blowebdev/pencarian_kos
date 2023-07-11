@@ -80,24 +80,40 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
         </div>
         <div class="col-xs-6">
          <ul class="list-inline top-right-nav">
-          <?php if(in_array($_SESSION['level'],array('x'))):  ?>
+          <?php if(in_array($_SESSION['level'],array('3'))):  ?>
             <li class="dropdown hidden-xs icon-dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <i class="glyphicon glyphicon-bell"></i>
-                <span class="badge badge-danger">6</span>
+                <?php 
+                if (in_array($_SESSION['level'],array('3'))) {
+                  $filter_notif = "WHERE d.id='".$_SESSION['id_mitra']."' AND a.status='PROSES'";
+                }elseif (in_array($_SESSION['level'],array('2'))) {
+                  $filter_notif = "WHERE a.id_pelanggan='".$_SESSION['id_pelanggan']."'";
+                }else{
+                  $filter_notif = "";
+                }
+                $sql_notif = mysqli_query($conn,"SELECT c.*, c.id as id_kos, c.nama as kos, d.nama as mitra, a.*, a.nama as pelanggan, b.alamat as alamat_pelanggan, date(tgl_pemesanan) as tgl FROM m_transaksi as a 
+                 LEFT JOIN m_pelanggan as b ON a.id_pelanggan = b.id
+                 LEFT JOIN m_kos as c ON a.id_kos = c.id
+                 LEFT JOIN m_mitra as d ON c.id_mitra = d.id
+                 $filter_notif
+                 ");
+                ?>  
+                <span class="badge badge-danger"><?php echo mysqli_num_rows($sql_notif); ?></span>
               </a>
               <ul class="dropdown-menu top-dropdown lg-dropdown notification-dropdown">
                 <li>
                   <div class="dropdown-header"><a href="<?php echo $base_url; ?>histori_pemesanan" class="pull-right text-muted"><small>View All</small></a> Notifications </div>
-                  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="scrollDiv" style="overflow: hidden; width: auto; height: 250px;">
+                  <div class="slimScrollDiv" style="position: relative; overflow: hidden;height: 250px;"><div class="scrollDiv" style="overflow: hidden; width: auto; height: 250px;">
+                    <?php while($dtg = mysqli_fetch_array($sql_notif)) { ?>
                     <div class="notification-list">
-                      <a href="javascript: void(0);" class="clearfix">
-                        <span class="notification-icon"><i class="icon-cloud-upload text-primary"></i></span> 
-                        <span class="notification-title">Upload Complete</span>
-                        <span class="notification-description">Praesent dictum nisl non est sagittis luctus.</span>
-                        <span class="notification-time">40 minutes ago</span>
+                      <a href="<?php echo $base_url; ?>invoice/<?php echo $dtg['kode_transaksi']; ?>" class="clearfix">
+                        <span class="notification-title">#<?php echo $dtg['kode_transaksi']; ?></span>
+                        <span class="notification-description"><?php echo $dtg['kos']; ?>.</span>
+                        <span class="notification-time"><?php echo hari_tanggal($dtg['tgl']); ?></span>
                       </a>
                     </div>
+                  <?php } ?>
                   </div>
                 </div>
               </li>
@@ -175,7 +191,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
         <a href="<?php echo $base_url; ?>master_kos" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bag"></i> Kos</a>
       </li>
       <li class="dropdown">
-        <a href="<?php echo $base_url; ?>histori_pemesanan" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan</a>
+        <a href="<?php echo $base_url; ?>histori_pemesanan" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan </a> 
       </li>
       <li class="dropdown">
         <a href="<?php echo $base_url; ?>statistik" role="button" aria-haspopup="true" aria-expanded="false"><i class=" icon-bar-chart"></i> Laporan</a>
@@ -184,7 +200,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTgPmRwGjuwyazUzzZl6CosQT
 
     <?php if(in_array($_SESSION['level'], array('1','2'))) : ?>
       <li class="dropdown">
-       <a href="<?php echo $base_url; ?>histori_pemesanan" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan</a>
+       <a href="<?php echo $base_url; ?>histori_pemesanan" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-list"></i> Pesanan</a> 
      </li>
    <?php endif; ?>
    <?php if(in_array($_SESSION['level'], array('1'))) : ?>
